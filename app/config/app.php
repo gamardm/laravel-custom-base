@@ -43,18 +43,7 @@ return array(
 
 	'locale' => 'en',
 
-	/*
-	|--------------------------------------------------------------------------
-	| Encryption Key
-	|--------------------------------------------------------------------------
-	|
-	| This key is used by the Illuminate encrypter service and should be set
-	| to a random, 32 character string, otherwise these encrypted strings
-	| will not be safe. Please do this before deploying an application!
-	|
-	*/
-
-	'key' => 'YourSecretKey!!!',
+	'key' => 'vvLDXhPG2zqdqOzCme9RYbpAqn2uGzcO',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -95,8 +84,8 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
-        'Cartalyst\Sentry\SentryServiceProvider',
-
+        'Maatwebsite\Excel\ExcelServiceProvider',
+        'Barryvdh\DomPDF\ServiceProvider',
 	),
 
 	/*
@@ -162,7 +151,9 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
-        'Sentry'          => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
+
+        'Excel'           => 'Maatwebsite\Excel\Facades\Excel',
+        'PDF'             => 'Barryvdh\DomPDF\Facade',
 
 	),
 

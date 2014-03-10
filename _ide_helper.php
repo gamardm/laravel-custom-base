@@ -11837,465 +11837,1294 @@ class View extends Illuminate\Support\Facades\View{
 
 }
 
-class Sentry extends Cartalyst\Sentry\Facades\Laravel\Sentry{
+class Excel extends Maatwebsite\Excel\Facades\Excel{
 	/**
-	 * Create a new Sentry object.
+	 * Constructor
+	 * 
+	 * Init the parent, init PHPExcel and set the defaults
 	 *
-	 * @param \Cartalyst\Sentry\Users\ProviderInterface $userProvider
-	 * @param \Cartalyst\Sentry\Groups\ProviderInterface $groupProvider
-	 * @param \Cartalyst\Sentry\Throttling\ProviderInterface $throttleProvider
-	 * @param \Cartalyst\Sentry\Sessions\SessionInterface $session
-	 * @param \Cartalyst\Sentry\Cookies\CookieInterface $cookie
-	 * @param string $ipAddress
+	 * @static 
+	 */
+	 public static function __construct(){
+		 Maatwebsite\Excel\Excel::__construct();
+	 }
+
+	/**
+	 * Create a new excel file, with default values and a file title.
+	 * 
+	 * @param str $title The file title
+	 *
+	 * @return $this
+	 * @static 
+	 */
+	 public static function create($title){
+		return Maatwebsite\Excel\Excel::create($title);
+	 }
+
+	/**
+	 * Load an existing file
+	 * 
+	 * @param str $file The file we want to load
+	 *
+	 * @param bool $firstRowAsLabel Do we want to interpret de first row as labels?
+	 *  @return $this
+	 * @static 
+	 */
+	 public static function load($file, $firstRowAsLabel = false, $inputEncoding = 'UTF-8'){
+		 Maatwebsite\Excel\Excel::load($file, $firstRowAsLabel, $inputEncoding);
+	 }
+
+	/**
+	 * 
+	 *
+	 * @static 
+	 */
+	 public static function reload(){
+		 Maatwebsite\Excel\Excel::reload();
+	 }
+
+	/**
+	 * Set the date format
+	 *
+	 * @param str $format The date format
+	 * @static 
+	 */
+	 public static function setDateFormat($format){
+		 Maatwebsite\Excel\Excel::setDateFormat($format);
+	 }
+
+	/**
+	 * Enable/disable date formating
+	 *
+	 * @param bool $boolean True/false
+	 * @static 
+	 */
+	 public static function formatDates($boolean){
+		 Maatwebsite\Excel\Excel::formatDates($boolean);
+	 }
+
+	/**
+	 * 
+	 *
+	 * @static 
+	 */
+	 public static function useCarbon($method = false){
+		 Maatwebsite\Excel\Excel::useCarbon($method);
+	 }
+
+	/**
+	 * Load a HTML string
+	 * 
+	 * @param string $string
+	 *
+	 * @return static
+	 * @static 
+	 */
+	 public static function loadHTML($string){
+		return Maatwebsite\Excel\Excel::loadHTML($string);
+	 }
+
+	/**
+	 * Load a View and convert to HTML
+	 * 
+	 * @param string $view
+	 *
+	 * @param array $data
+	 *  @param array $mergeData
+	 *  @return static
+	 * @static 
+	 */
+	 public static function loadView($view, $data = array(), $mergeData = array()){
+		 Maatwebsite\Excel\Excel::loadView($view, $data, $mergeData);
+	 }
+
+	/**
+	 * Set the delimiter for CSV
+	 * 
+	 * @param str $delimiter The delimiter we want to use
+	 *
+	 * @return $this
+	 * @static 
+	 */
+	 public static function setDelimiter($delimiter){
+		return Maatwebsite\Excel\Excel::setDelimiter($delimiter);
+	 }
+
+	/**
+	 * Set the delimiter for CSV
+	 * 
+	 * @param str $delimiter The delimiter we want to use
+	 *
+	 * @return $this
+	 * @static 
+	 */
+	 public static function setEnclosure($enclosure = ''){
+		return Maatwebsite\Excel\Excel::setEnclosure($enclosure);
+	 }
+
+	/**
+	 * Set the delimiter for CSV
+	 * 
+	 * @param str $delimiter The delimiter we want to use
+	 *
+	 * @return $this
+	 * @static 
+	 */
+	 public static function setLineEnding($lineEnding = ''){
+		return Maatwebsite\Excel\Excel::setLineEnding($lineEnding);
+	 }
+
+	/**
+	 * Set the file title
+	 * 
+	 * @param str $title The file title
+	 *
+	 * @return $this
+	 * @static 
+	 */
+	 public static function setTitle($title){
+		return Maatwebsite\Excel\Excel::setTitle($title);
+	 }
+
+	/**
+	 * Set default calculate
+	 * 
+	 * @param bool $do Calculate yes or no
+	 *
+	 * @return $this
+	 * @static 
+	 */
+	 public static function calculate($do = true){
+		return Maatwebsite\Excel\Excel::calculate($do);
+	 }
+
+	/**
+	 * Set the limit
+	 * 
+	 * @param int $amount The amount we want to return
+	 *
+	 * @param int $start The position we wil start on
+	 *  @return $this
+	 * @static 
+	 */
+	 public static function limit($amount, $start = 0){
+		 Maatwebsite\Excel\Excel::limit($amount, $start);
+	 }
+
+	/**
+	 * Select columns from the array
+	 * 
+	 * @param array $keys The columns we want to select
+	 *
+	 * @return $this
+	 * @static 
+	 */
+	 public static function select($keys = array()){
+		return Maatwebsite\Excel\Excel::select($keys);
+	 }
+
+	/**
+	 * Parse the file to an array.
+	 * 
+	 * @return array $this->parsed The parsed array
+	 *
+	 * @static 
+	 */
+	 public static function toArray(){
+		 Maatwebsite\Excel\Excel::toArray();
+	 }
+
+	/**
+	 * Parse the file to an object.
+	 * 
+	 * @return obj $this->parsed The parsed object
+	 *
+	 * @static 
+	 */
+	 public static function toObject(){
+		 Maatwebsite\Excel\Excel::toObject();
+	 }
+
+	/**
+	 * Dump the parsed file to a readable array
+	 * 
+	 * @return array $this->parsed The parsed array
+	 *
+	 * @static 
+	 */
+	 public static function dump(){
+		 Maatwebsite\Excel\Excel::dump();
+	 }
+
+	/**
+	 * Init a new sheet
+	 * 
+	 * @param str $title The sheet name
+	 *
+	 * @param str $orientation The sheet orientation
+	 *  @return $this
+	 * @static 
+	 */
+	 public static function sheet($title, $orientation = 'landscape'){
+		 Maatwebsite\Excel\Excel::sheet($title, $orientation);
+	 }
+
+	/**
+	 * Pass an array to the sheet to fill it with
+	 * 
+	 * @param array $array The array to fill the sheet with
+	 *
+	 * @return $this
+	 * @static 
+	 */
+	 public static function with($array){
+		return Maatwebsite\Excel\Excel::with($array);
+	 }
+
+	/**
+	 * Export the file to a given filetype
+	 * 
+	 * @param str $ext The file extension
+	 *
+	 * @return $this
+	 * @static 
+	 */
+	 public static function export($ext = 'xls'){
+		return Maatwebsite\Excel\Excel::export($ext);
+	 }
+
+	/**
+	 * Export the file to a given filetype
+	 * 
+	 * @param str $ext The file extension
+	 *
+	 * @param str $path The save path
+	 *  @return $this
+	 * @static 
+	 */
+	 public static function save($ext = 'xls', $path = false){
+		 Maatwebsite\Excel\Excel::save($ext, $path);
+	 }
+
+	/**
+	 * Store the excel file to the server without a download popup
+	 * 
+	 * @param str $ext The file extension
+	 *
+	 * @param str $path The save path
+	 *  @return $this
+	 * @static 
+	 */
+	 public static function store($ext = 'xls', $path = false, $returnInfo = false){
+		 Maatwebsite\Excel\Excel::store($ext, $path, $returnInfo);
+	 }
+
+	/**
+	 * Convert the file to a given filetype
+	 * 
+	 * @param str $ext The file extension
+	 *
+	 * @return $this
+	 * @static 
+	 */
+	 public static function convert($ext = 'xls'){
+		return Maatwebsite\Excel\Excel::convert($ext);
+	 }
+
+	/**
+	 * Freeze or lock rows and columns
+	 * 
+	 * @param string $pane rows and columns , default freeze the first row
+	 *
+	 * @return $this
+	 *  @author xiehai
+	 *  @example ->setFreeze()          Freeze the first row
+	 *           ->setFreeze('B1')      Freeze the first column (THE A COLUMN)
+	 *           ->setFreeze('B2')      Freeze the first row and first column
+	 * @static 
+	 */
+	 public static function setFreeze($pane = 'A2'){
+		return Maatwebsite\Excel\Excel::setFreeze($pane);
+	 }
+
+	/**
+	 * Freeze the first row
+	 *
+	 * @return $this
+	 * @static 
+	 */
+	 public static function freezeFirstRow(){
+		return Maatwebsite\Excel\Excel::freezeFirstRow();
+	 }
+
+	/**
+	 * Freeze the first column
+	 *
+	 * @return $this
+	 * @static 
+	 */
+	 public static function freezeFirstColumn(){
+		return Maatwebsite\Excel\Excel::freezeFirstColumn();
+	 }
+
+	/**
+	 * Freeze the first row and column
+	 *
+	 * @return $this
+	 * @static 
+	 */
+	 public static function freezeFirstRowAndColumn(){
+		return Maatwebsite\Excel\Excel::freezeFirstRowAndColumn();
+	 }
+
+	/**
+	 * Set a range of cell borders
+	 * 
+	 * @param string $pane Start and end of the cell (A1:F10)
+	 *
+	 * @param string $weight Border style (Reference setBorder style list)
+	 *  @return $this
+	 *  @author xiehai
+	 *  @example ->setBorder('A1:F10','thick')
+	 * @static 
+	 */
+	 public static function setBorder($pane = 'A1', $weight = 'thin'){
+		 Maatwebsite\Excel\Excel::setBorder($pane, $weight);
+	 }
+
+	/**
+	 * Set all cell borders
+	 * 
+	 * @param string $weight Border style (Reference setBorder style list)
+	 *
+	 * @return $this
+	 *  @author xiehai
+	 *  @example Excel::create()->setAllBorder()   Must follow the function of create()
+	 * @static 
+	 */
+	 public static function setAllBorder($weight = 'thin'){
+		return Maatwebsite\Excel\Excel::setAllBorder($weight);
+	 }
+
+	/**
+	 * Set AutoFilter
+	 * 
+	 * @return $this
+	 *
+	 * @author xiehai
+	 *  @example ->setAutoFilter()
+	 * @static 
+	 */
+	 public static function setAutoFilter(){
+		 Maatwebsite\Excel\Excel::setAutoFilter();
+	 }
+
+	/**
+	 * Set the cell format of the column
+	 * 
+	 * @return $this
+	 *
+	 * @param array $formats An array of cells you want to format columns
+	 *  @author xiehai
+	 *  @example ->setColumnFormat(array(
+	 * 			'B' => '0',
+	 * 			'D' => '0.00',
+	 * 			'F' => '@',
+	 * 			'F' => 'yyyy-mm-dd',
+	 * 			......
+	 * 		)
+	 *  )
+	 *  @uses This method can only be used before the with() method
+	 * @static 
+	 */
+	 public static function setColumnFormat($formats){
+		 Maatwebsite\Excel\Excel::setColumnFormat($formats);
+	 }
+
+	/**
+	 * Set the cell width of the columns
+	 * 
+	 * @return $this
+	 *
+	 * @param array $pane An array of column widths
+	 *  @author xiehai
+	 *  @example ->setColumnWidth(array(
+	 * 			'A' => '10',
+	 * 			'B' => '22',
+	 * 			'F' => '8',
+	 * 			'N' => '13',
+	 * 			......
+	 * 		)
+	 *  )
+	 * @static 
+	 */
+	 public static function setColumnWidth($pane){
+		 Maatwebsite\Excel\Excel::setColumnWidth($pane);
+	 }
+
+	/**
+	 * Set the columns you want to merge
+	 * 
+	 * @return $this
+	 *
+	 * @param array $mergeColumn An array of columns you want to merge
+	 *  @author xiehai
+	 *  @example	$mergeColumn = array(
+	 * 	            'columns' => array('A','B','C','D'),
+	 * 	            'rows' => array(
+	 * 		 			array(2,3),
+	 * 		 			array(5,11),
+	 * 						.....
+	 * 		 		 )
+	 * 		      );
+	 * @static 
+	 */
+	 public static function setMergeColumn($mergeColumn){
+		 Maatwebsite\Excel\Excel::setMergeColumn($mergeColumn);
+	 }
+
+	/**
+	 * Native merged cell method
+	 * 
+	 * @return $this
+	 *
+	 * @param array $cells
+	 *  @author xiehai
+	 * @static 
+	 */
+	 public static function mergeCells($cells){
+		 Maatwebsite\Excel\Excel::mergeCells($cells);
+	 }
+
+	/**
+	 * The workbook has macros ?
+	 *
+	 * @return true if workbook has macros, false if not
+	 * @static 
+	 */
+	 public static function hasMacros(){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::hasMacros();
+	 }
+
+	/**
+	 * Define if a workbook has macros
+	 *
+	 * @param true|false
+	 * @static 
+	 */
+	 public static function setHasMacros($hasMacros = false){
+		//Method inherited from PHPExcel
+		 Maatwebsite\Excel\Excel::setHasMacros($hasMacros);
+	 }
+
+	/**
+	 * Set the macros code
+	 *
+	 * @param binary string|null
+	 * @static 
+	 */
+	 public static function setMacrosCode($MacrosCode){
+		//Method inherited from PHPExcel
+		 Maatwebsite\Excel\Excel::setMacrosCode($MacrosCode);
+	 }
+
+	/**
+	 * Return the macros code
+	 *
+	 * @return binary|null
+	 * @static 
+	 */
+	 public static function getMacrosCode(){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::getMacrosCode();
+	 }
+
+	/**
+	 * Set the macros certificate
+	 *
+	 * @param binary|null
+	 * @static 
+	 */
+	 public static function setMacrosCertificate($Certificate = null){
+		//Method inherited from PHPExcel
+		 Maatwebsite\Excel\Excel::setMacrosCertificate($Certificate);
+	 }
+
+	/**
+	 * Is the project signed ?
+	 *
+	 * @return true|false
+	 * @static 
+	 */
+	 public static function hasMacrosCertificate(){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::hasMacrosCertificate();
+	 }
+
+	/**
+	 * Return the macros certificate
+	 *
+	 * @return binary|null
+	 * @static 
+	 */
+	 public static function getMacrosCertificate(){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::getMacrosCertificate();
+	 }
+
+	/**
+	 * Remove all macros, certificate from spreadsheet
+	 *
+	 * @param none
 	 * @return void
 	 * @static 
 	 */
-	 public static function __construct($userProvider = null, $groupProvider = null, $throttleProvider = null, $session = null, $cookie = null, $ipAddress = null){
-		 Cartalyst\Sentry\Sentry::__construct($userProvider, $groupProvider, $throttleProvider, $session, $cookie, $ipAddress);
+	 public static function discardMacros(){
+		//Method inherited from PHPExcel
+		 Maatwebsite\Excel\Excel::discardMacros();
 	 }
 
 	/**
-	 * Registers a user by giving the required credentials
-	 * and an optional flag for whether to activate the user.
+	 * set ribbon XML data
 	 *
-	 * @param array  $credentials
-	 * @param bool   $activate
-	 * @return \Cartalyst\Sentry\Users\UserInterface
 	 * @static 
 	 */
-	 public static function register($credentials, $activate = false){
-		return Cartalyst\Sentry\Sentry::register($credentials, $activate);
+	 public static function setRibbonXMLData($Target = null, $XMLData = null){
+		//Method inherited from PHPExcel
+		 Maatwebsite\Excel\Excel::setRibbonXMLData($Target, $XMLData);
 	 }
 
 	/**
-	 * Attempts to authenticate the given user
-	 * according to the passed credentials.
+	 * retrieve ribbon XML Data
+	 * 
+	 * return string|null|array
 	 *
-	 * @param array  $credentials
-	 * @param bool   $remember
-	 * @return \Cartalyst\Sentry\Users\UserInterface
-	 * @throws \Cartalyst\Sentry\Throttling\UserBannedException
-	 * @throws \Cartalyst\Sentry\Throttling\UserSuspendedException
-	 * @throws \Cartalyst\Sentry\Users\LoginRequiredException
-	 * @throws \Cartalyst\Sentry\Users\PasswordRequiredException
-	 * @throws \Cartalyst\Sentry\Users\UserNotFoundException
 	 * @static 
 	 */
-	 public static function authenticate($credentials, $remember = false){
-		return Cartalyst\Sentry\Sentry::authenticate($credentials, $remember);
+	 public static function getRibbonXMLData($What = 'all'){
+		//Method inherited from PHPExcel
+		 Maatwebsite\Excel\Excel::getRibbonXMLData($What);
 	 }
 
 	/**
-	 * Alias for authenticating with the remember flag checked.
+	 * store binaries ribbon objects (pictures)
 	 *
-	 * @param array  $credentials
-	 * @return \Cartalyst\Sentry\Users\UserInterface
 	 * @static 
 	 */
-	 public static function authenticateAndRemember($credentials){
-		return Cartalyst\Sentry\Sentry::authenticateAndRemember($credentials);
+	 public static function setRibbonBinObjects($BinObjectsNames = null, $BinObjectsData = null){
+		//Method inherited from PHPExcel
+		 Maatwebsite\Excel\Excel::setRibbonBinObjects($BinObjectsNames, $BinObjectsData);
 	 }
 
 	/**
-	 * Check to see if the user is logged in and activated, and hasn't been banned or suspended.
+	 * retrieve Binaries Ribbon Objects
 	 *
-	 * @return bool
 	 * @static 
 	 */
-	 public static function check(){
-		return Cartalyst\Sentry\Sentry::check();
+	 public static function getRibbonBinObjects($What = 'all'){
+		//Method inherited from PHPExcel
+		 Maatwebsite\Excel\Excel::getRibbonBinObjects($What);
 	 }
 
 	/**
-	 * Logs in the given user and sets properties
-	 * in the session.
+	 * This workbook have a custom UI ?
 	 *
-	 * @param \Cartalyst\Sentry\Users\UserInterface  $user
-	 * @param bool  $remember
-	 * @return void
-	 * @throws \Cartalyst\Sentry\Users\UserNotActivatedException
+	 * @return true|false
 	 * @static 
 	 */
-	 public static function login($user, $remember = false){
-		 Cartalyst\Sentry\Sentry::login($user, $remember);
+	 public static function hasRibbon(){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::hasRibbon();
 	 }
 
 	/**
-	 * Alias for logging in and remembering.
+	 * This workbook have additionnal object for the ribbon ?
 	 *
-	 * @param \Cartalyst\Sentry\Users\UserInterface  $user
+	 * @return true|false
 	 * @static 
 	 */
-	 public static function loginAndRemember($user){
-		 Cartalyst\Sentry\Sentry::loginAndRemember($user);
+	 public static function hasRibbonBinObjects(){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::hasRibbonBinObjects();
 	 }
 
 	/**
-	 * Logs the current user out.
+	 * Check if a sheet with a specified code name already exists
 	 *
-	 * @return void
+	 * @param string $pSheetCodeName  Name of the worksheet to check
+	 * @return boolean
 	 * @static 
 	 */
-	 public static function logout(){
-		 Cartalyst\Sentry\Sentry::logout();
+	 public static function sheetCodeNameExists($pSheetCodeName){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::sheetCodeNameExists($pSheetCodeName);
 	 }
 
 	/**
-	 * Sets the user to be used by Sentry.
+	 * Get sheet by code name. Warning : sheet don't have always a code name !
 	 *
-	 * @param \Cartalyst\Sentry\Users\UserInterface
-	 * @return void
+	 * @param string $pName Sheet name
+	 * @return PHPExcel_Worksheet
 	 * @static 
 	 */
-	 public static function setUser($user){
-		 Cartalyst\Sentry\Sentry::setUser($user);
+	 public static function getSheetByCodeName($pName = ''){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::getSheetByCodeName($pName);
 	 }
 
 	/**
-	 * Returns the current user being used by Sentry, if any.
+	 * Code to execute when this worksheet is unset()
 	 *
-	 * @return \Cartalyst\Sentry\Users\UserInterface
 	 * @static 
 	 */
-	 public static function getUser(){
-		return Cartalyst\Sentry\Sentry::getUser();
+	 public static function __destruct(){
+		//Method inherited from PHPExcel
+		 Maatwebsite\Excel\Excel::__destruct();
 	 }
 
 	/**
-	 * Sets the session driver for Sentry.
+	 * Disconnect all worksheets from this PHPExcel workbook object,
+	 *    typically so that the PHPExcel object can be unset
 	 *
-	 * @param \Cartalyst\Sentry\Sessions\SessionInterface  $session
-	 * @return void
 	 * @static 
 	 */
-	 public static function setSession($session){
-		 Cartalyst\Sentry\Sentry::setSession($session);
+	 public static function disconnectWorksheets(){
+		//Method inherited from PHPExcel
+		 Maatwebsite\Excel\Excel::disconnectWorksheets();
 	 }
 
 	/**
-	 * Gets the session driver for Sentry.
+	 * Return the calculation engine for this worksheet
 	 *
-	 * @return \Cartalyst\Sentry\Sessions\SessionInterface
+	 * @return PHPExcel_Calculation
 	 * @static 
 	 */
-	 public static function getSession(){
-		return Cartalyst\Sentry\Sentry::getSession();
+	 public static function getCalculationEngine(){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::getCalculationEngine();
 	 }
 
 	/**
-	 * Sets the cookie driver for Sentry.
+	 * Get properties
 	 *
-	 * @param \Cartalyst\Sentry\Cookies\CookieInterface  $cookie
-	 * @return void
+	 * @return PHPExcel_DocumentProperties
 	 * @static 
 	 */
-	 public static function setCookie($cookie){
-		 Cartalyst\Sentry\Sentry::setCookie($cookie);
+	 public static function getProperties(){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::getProperties();
 	 }
 
 	/**
-	 * Gets the cookie driver for Sentry.
+	 * Set properties
 	 *
-	 * @return \Cartalyst\Sentry\Cookies\CookieInterface
+	 * @param PHPExcel_DocumentProperties    $pValue
 	 * @static 
 	 */
-	 public static function getCookie(){
-		return Cartalyst\Sentry\Sentry::getCookie();
+	 public static function setProperties($pValue){
+		//Method inherited from PHPExcel
+		 Maatwebsite\Excel\Excel::setProperties($pValue);
 	 }
 
 	/**
-	 * Sets the group provider for Sentry.
+	 * Get security
 	 *
-	 * @param \Cartalyst\Sentry\Groups\ProviderInterface
-	 * @return void
+	 * @return PHPExcel_DocumentSecurity
 	 * @static 
 	 */
-	 public static function setGroupProvider($groupProvider){
-		 Cartalyst\Sentry\Sentry::setGroupProvider($groupProvider);
+	 public static function getSecurity(){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::getSecurity();
 	 }
 
 	/**
-	 * Gets the group provider for Sentry.
+	 * Set security
 	 *
-	 * @return \Cartalyst\Sentry\Groups\ProviderInterface
+	 * @param PHPExcel_DocumentSecurity    $pValue
 	 * @static 
 	 */
-	 public static function getGroupProvider(){
-		return Cartalyst\Sentry\Sentry::getGroupProvider();
+	 public static function setSecurity($pValue){
+		//Method inherited from PHPExcel
+		 Maatwebsite\Excel\Excel::setSecurity($pValue);
 	 }
 
 	/**
-	 * Sets the user provider for Sentry.
+	 * Get active sheet
 	 *
-	 * @param \Cartalyst\Sentry\Users\ProviderInterface
-	 * @return void
+	 * @return PHPExcel_Worksheet
 	 * @static 
 	 */
-	 public static function setUserProvider($userProvider){
-		 Cartalyst\Sentry\Sentry::setUserProvider($userProvider);
+	 public static function getActiveSheet(){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::getActiveSheet();
 	 }
 
 	/**
-	 * Gets the user provider for Sentry.
+	 * Create sheet and add it to this workbook
 	 *
-	 * @return \Cartalyst\Sentry\Users\ProviderInterface
+	 * @param int|null $iSheetIndex Index where sheet should go (0,1,..., or null for last)
+	 * @return PHPExcel_Worksheet
+	 * @throws PHPExcel_Exception
 	 * @static 
 	 */
-	 public static function getUserProvider(){
-		return Cartalyst\Sentry\Sentry::getUserProvider();
+	 public static function createSheet($iSheetIndex = null){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::createSheet($iSheetIndex);
 	 }
 
 	/**
-	 * Sets the throttle provider for Sentry.
+	 * Check if a sheet with a specified name already exists
 	 *
-	 * @param \Cartalyst\Sentry\Throttling\ProviderInterface
-	 * @return void
+	 * @param string $pSheetName  Name of the worksheet to check
+	 * @return boolean
 	 * @static 
 	 */
-	 public static function setThrottleProvider($throttleProvider){
-		 Cartalyst\Sentry\Sentry::setThrottleProvider($throttleProvider);
+	 public static function sheetNameExists($pSheetName){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::sheetNameExists($pSheetName);
 	 }
 
 	/**
-	 * Gets the throttle provider for Sentry.
+	 * Add sheet
 	 *
-	 * @return \Cartalyst\Sentry\Throttling\ProviderInterface
+	 * @param PHPExcel_Worksheet $pSheet
+	 * @param int|null $iSheetIndex Index where sheet should go (0,1,..., or null for last)
+	 * @return PHPExcel_Worksheet
+	 * @throws PHPExcel_Exception
 	 * @static 
 	 */
-	 public static function getThrottleProvider(){
-		return Cartalyst\Sentry\Sentry::getThrottleProvider();
+	 public static function addSheet($pSheet, $iSheetIndex = null){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::addSheet($pSheet, $iSheetIndex);
 	 }
 
 	/**
-	 * Sets the IP address Sentry is bound to.
+	 * Remove sheet by index
 	 *
-	 * @param string  $ipAddress
-	 * @return void
+	 * @param int $pIndex Active sheet index
+	 * @throws PHPExcel_Exception
 	 * @static 
 	 */
-	 public static function setIpAddress($ipAddress){
-		 Cartalyst\Sentry\Sentry::setIpAddress($ipAddress);
+	 public static function removeSheetByIndex($pIndex = 0){
+		//Method inherited from PHPExcel
+		 Maatwebsite\Excel\Excel::removeSheetByIndex($pIndex);
 	 }
 
 	/**
-	 * Gets the IP address Sentry is bound to.
+	 * Get sheet by index
+	 *
+	 * @param int $pIndex Sheet index
+	 * @return PHPExcel_Worksheet
+	 * @throws PHPExcel_Exception
+	 * @static 
+	 */
+	 public static function getSheet($pIndex = 0){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::getSheet($pIndex);
+	 }
+
+	/**
+	 * Get all sheets
+	 *
+	 * @return PHPExcel_Worksheet[]
+	 * @static 
+	 */
+	 public static function getAllSheets(){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::getAllSheets();
+	 }
+
+	/**
+	 * Get sheet by name
+	 *
+	 * @param string $pName Sheet name
+	 * @return PHPExcel_Worksheet
+	 * @static 
+	 */
+	 public static function getSheetByName($pName = ''){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::getSheetByName($pName);
+	 }
+
+	/**
+	 * Get index for sheet
+	 *
+	 * @param PHPExcel_Worksheet $pSheet
+	 * @return Sheet index
+	 * @throws PHPExcel_Exception
+	 * @static 
+	 */
+	 public static function getIndex($pSheet){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::getIndex($pSheet);
+	 }
+
+	/**
+	 * Set index for sheet by sheet name.
+	 *
+	 * @param string $sheetName Sheet name to modify index for
+	 * @param int $newIndex New index for the sheet
+	 * @return New sheet index
+	 * @throws PHPExcel_Exception
+	 * @static 
+	 */
+	 public static function setIndexByName($sheetName, $newIndex){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::setIndexByName($sheetName, $newIndex);
+	 }
+
+	/**
+	 * Get sheet count
+	 *
+	 * @return int
+	 * @static 
+	 */
+	 public static function getSheetCount(){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::getSheetCount();
+	 }
+
+	/**
+	 * Get active sheet index
+	 *
+	 * @return int Active sheet index
+	 * @static 
+	 */
+	 public static function getActiveSheetIndex(){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::getActiveSheetIndex();
+	 }
+
+	/**
+	 * Set active sheet index
+	 *
+	 * @param int $pIndex Active sheet index
+	 * @throws PHPExcel_Exception
+	 * @return PHPExcel_Worksheet
+	 * @static 
+	 */
+	 public static function setActiveSheetIndex($pIndex = 0){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::setActiveSheetIndex($pIndex);
+	 }
+
+	/**
+	 * Set active sheet index by name
+	 *
+	 * @param string $pValue Sheet title
+	 * @return PHPExcel_Worksheet
+	 * @throws PHPExcel_Exception
+	 * @static 
+	 */
+	 public static function setActiveSheetIndexByName($pValue = ''){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::setActiveSheetIndexByName($pValue);
+	 }
+
+	/**
+	 * Get sheet names
+	 *
+	 * @return string[]
+	 * @static 
+	 */
+	 public static function getSheetNames(){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::getSheetNames();
+	 }
+
+	/**
+	 * Add external sheet
+	 *
+	 * @param PHPExcel_Worksheet $pSheet External sheet to add
+	 * @param int|null $iSheetIndex Index where sheet should go (0,1,..., or null for last)
+	 * @throws PHPExcel_Exception
+	 * @return PHPExcel_Worksheet
+	 * @static 
+	 */
+	 public static function addExternalSheet($pSheet, $iSheetIndex = null){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::addExternalSheet($pSheet, $iSheetIndex);
+	 }
+
+	/**
+	 * Get named ranges
+	 *
+	 * @return PHPExcel_NamedRange[]
+	 * @static 
+	 */
+	 public static function getNamedRanges(){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::getNamedRanges();
+	 }
+
+	/**
+	 * Add named range
+	 *
+	 * @param PHPExcel_NamedRange $namedRange
+	 * @return PHPExcel
+	 * @static 
+	 */
+	 public static function addNamedRange($namedRange){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::addNamedRange($namedRange);
+	 }
+
+	/**
+	 * Get named range
+	 *
+	 * @param string $namedRange
+	 * @param PHPExcel_Worksheet|null $pSheet Scope. Use null for global scope
+	 * @return PHPExcel_NamedRange|null
+	 * @static 
+	 */
+	 public static function getNamedRange($namedRange, $pSheet = null){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::getNamedRange($namedRange, $pSheet);
+	 }
+
+	/**
+	 * Remove named range
+	 *
+	 * @param string  $namedRange
+	 * @param PHPExcel_Worksheet|null  $pSheet  Scope: use null for global scope.
+	 * @return PHPExcel
+	 * @static 
+	 */
+	 public static function removeNamedRange($namedRange, $pSheet = null){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::removeNamedRange($namedRange, $pSheet);
+	 }
+
+	/**
+	 * Get worksheet iterator
+	 *
+	 * @return PHPExcel_WorksheetIterator
+	 * @static 
+	 */
+	 public static function getWorksheetIterator(){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::getWorksheetIterator();
+	 }
+
+	/**
+	 * Copy workbook (!= clone!)
+	 *
+	 * @return PHPExcel
+	 * @static 
+	 */
+	 public static function copy(){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::copy();
+	 }
+
+	/**
+	 * Get the workbook collection of cellXfs
+	 *
+	 * @return PHPExcel_Style[]
+	 * @static 
+	 */
+	 public static function getCellXfCollection(){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::getCellXfCollection();
+	 }
+
+	/**
+	 * Get cellXf by index
+	 *
+	 * @param int $pIndex
+	 * @return PHPExcel_Style
+	 * @static 
+	 */
+	 public static function getCellXfByIndex($pIndex = 0){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::getCellXfByIndex($pIndex);
+	 }
+
+	/**
+	 * Get cellXf by hash code
+	 *
+	 * @param string $pValue
+	 * @return PHPExcel_Style|false
+	 * @static 
+	 */
+	 public static function getCellXfByHashCode($pValue = ''){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::getCellXfByHashCode($pValue);
+	 }
+
+	/**
+	 * Check if style exists in style collection
+	 *
+	 * @param PHPExcel_Style $pCellStyle
+	 * @return boolean
+	 * @static 
+	 */
+	 public static function cellXfExists($pCellStyle = null){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::cellXfExists($pCellStyle);
+	 }
+
+	/**
+	 * Get default style
+	 *
+	 * @return PHPExcel_Style
+	 * @throws PHPExcel_Exception
+	 * @static 
+	 */
+	 public static function getDefaultStyle(){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::getDefaultStyle();
+	 }
+
+	/**
+	 * Add a cellXf to the workbook
+	 *
+	 * @param PHPExcel_Style $style
+	 * @static 
+	 */
+	 public static function addCellXf($style){
+		//Method inherited from PHPExcel
+		 Maatwebsite\Excel\Excel::addCellXf($style);
+	 }
+
+	/**
+	 * Remove cellXf by index. It is ensured that all cells get their xf index updated.
+	 *
+	 * @param int $pIndex Index to cellXf
+	 * @throws PHPExcel_Exception
+	 * @static 
+	 */
+	 public static function removeCellXfByIndex($pIndex = 0){
+		//Method inherited from PHPExcel
+		 Maatwebsite\Excel\Excel::removeCellXfByIndex($pIndex);
+	 }
+
+	/**
+	 * Get the cellXf supervisor
+	 *
+	 * @return PHPExcel_Style
+	 * @static 
+	 */
+	 public static function getCellXfSupervisor(){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::getCellXfSupervisor();
+	 }
+
+	/**
+	 * Get the workbook collection of cellStyleXfs
+	 *
+	 * @return PHPExcel_Style[]
+	 * @static 
+	 */
+	 public static function getCellStyleXfCollection(){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::getCellStyleXfCollection();
+	 }
+
+	/**
+	 * Get cellStyleXf by index
+	 *
+	 * @param int $pIndex
+	 * @return PHPExcel_Style
+	 * @static 
+	 */
+	 public static function getCellStyleXfByIndex($pIndex = 0){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::getCellStyleXfByIndex($pIndex);
+	 }
+
+	/**
+	 * Get cellStyleXf by hash code
+	 *
+	 * @param string $pValue
+	 * @return PHPExcel_Style|false
+	 * @static 
+	 */
+	 public static function getCellStyleXfByHashCode($pValue = ''){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::getCellStyleXfByHashCode($pValue);
+	 }
+
+	/**
+	 * Add a cellStyleXf to the workbook
+	 *
+	 * @param PHPExcel_Style $pStyle
+	 * @static 
+	 */
+	 public static function addCellStyleXf($pStyle){
+		//Method inherited from PHPExcel
+		 Maatwebsite\Excel\Excel::addCellStyleXf($pStyle);
+	 }
+
+	/**
+	 * Remove cellStyleXf by index
+	 *
+	 * @param int $pIndex
+	 * @throws PHPExcel_Exception
+	 * @static 
+	 */
+	 public static function removeCellStyleXfByIndex($pIndex = 0){
+		//Method inherited from PHPExcel
+		 Maatwebsite\Excel\Excel::removeCellStyleXfByIndex($pIndex);
+	 }
+
+	/**
+	 * Eliminate all unneeded cellXf and afterwards update the xfIndex for all cells
+	 * and columns in the workbook
+	 *
+	 * @static 
+	 */
+	 public static function garbageCollect(){
+		//Method inherited from PHPExcel
+		 Maatwebsite\Excel\Excel::garbageCollect();
+	 }
+
+	/**
+	 * Return the unique ID value assigned to this spreadsheet workbook
 	 *
 	 * @return string
 	 * @static 
 	 */
-	 public static function getIpAddress(){
-		return Cartalyst\Sentry\Sentry::getIpAddress();
+	 public static function getID(){
+		//Method inherited from PHPExcel
+		return Maatwebsite\Excel\Excel::getID();
+	 }
+
+}
+
+class PDF extends Barryvdh\DomPDF\Facade{
+	/**
+	 * 
+	 *
+	 * @static 
+	 */
+	 public static function __construct(){
+		 Barryvdh\DomPDF\PDF::__construct();
 	 }
 
 	/**
-	 * Find the group by ID.
+	 * Get the DomPDF instance
 	 *
-	 * @param int  $id
-	 * @return \Cartalyst\Sentry\Groups\GroupInterface  $group
-	 * @throws \Cartalyst\Sentry\Groups\GroupNotFoundException
+	 * @return \DOMPDF
 	 * @static 
 	 */
-	 public static function findGroupById($id){
-		return Cartalyst\Sentry\Sentry::findGroupById($id);
+	 public static function getDomPDF(){
+		return Barryvdh\DomPDF\PDF::getDomPDF();
 	 }
 
 	/**
-	 * Find the group by name.
+	 * Set the paper size (default A4)
 	 *
-	 * @param string  $name
-	 * @return \Cartalyst\Sentry\Groups\GroupInterface  $group
-	 * @throws \Cartalyst\Sentry\Groups\GroupNotFoundException
+	 * @param string $paper
+	 * @param string $orientation
+	 * @return $this
 	 * @static 
 	 */
-	 public static function findGroupByName($name){
-		return Cartalyst\Sentry\Sentry::findGroupByName($name);
+	 public static function setPaper($paper, $orientation = null){
+		return Barryvdh\DomPDF\PDF::setPaper($paper, $orientation);
 	 }
 
 	/**
-	 * Returns all groups.
+	 * Set the orientation (default portrait)
 	 *
-	 * @return array  $groups
+	 * @param string $orientation
+	 * @return static
 	 * @static 
 	 */
-	 public static function findAllGroups(){
-		return Cartalyst\Sentry\Sentry::findAllGroups();
+	 public static function setOrientation($orientation){
+		return Barryvdh\DomPDF\PDF::setOrientation($orientation);
 	 }
 
 	/**
-	 * Creates a group.
+	 * Show or hide warnings
 	 *
-	 * @param array  $attributes
-	 * @return \Cartalyst\Sentry\Groups\GroupInterface
+	 * @param bool $warnings
+	 * @return $this
 	 * @static 
 	 */
-	 public static function createGroup($attributes){
-		return Cartalyst\Sentry\Sentry::createGroup($attributes);
+	 public static function setWarnings($warnings){
+		return Barryvdh\DomPDF\PDF::setWarnings($warnings);
 	 }
 
 	/**
-	 * Finds a user by the given user ID.
+	 * Load a HTML string
 	 *
-	 * @param mixed  $id
-	 * @return \Cartalyst\Sentry\Users\UserInterface
-	 * @throws \Cartalyst\Sentry\Users\UserNotFoundException
+	 * @param string $string
+	 * @param string $encoding Not used yet
+	 * @return static
 	 * @static 
 	 */
-	 public static function findUserById($id){
-		return Cartalyst\Sentry\Sentry::findUserById($id);
+	 public static function loadHTML($string, $encoding = null){
+		return Barryvdh\DomPDF\PDF::loadHTML($string, $encoding);
 	 }
 
 	/**
-	 * Finds a user by the login value.
+	 * Load a HTML file
 	 *
-	 * @param string  $login
-	 * @return \Cartalyst\Sentry\Users\UserInterface
-	 * @throws \Cartalyst\Sentry\Users\UserNotFoundException
+	 * @param string $file
+	 * @return static
 	 * @static 
 	 */
-	 public static function findUserByLogin($login){
-		return Cartalyst\Sentry\Sentry::findUserByLogin($login);
+	 public static function loadFile($file){
+		return Barryvdh\DomPDF\PDF::loadFile($file);
 	 }
 
 	/**
-	 * Finds a user by the given credentials.
+	 * Load a View and convert to HTML
 	 *
-	 * @param array  $credentials
-	 * @return \Cartalyst\Sentry\Users\UserInterface
-	 * @throws \Cartalyst\Sentry\Users\UserNotFoundException
+	 * @param string $view
+	 * @param array $data
+	 * @param array $mergeData
+	 * @param string $encoding Not used yet
+	 * @return static
 	 * @static 
 	 */
-	 public static function findUserByCredentials($credentials){
-		return Cartalyst\Sentry\Sentry::findUserByCredentials($credentials);
+	 public static function loadView($view, $data = array(), $mergeData = array(), $encoding = null){
+		return Barryvdh\DomPDF\PDF::loadView($view, $data, $mergeData, $encoding);
 	 }
 
 	/**
-	 * Finds a user by the given activation code.
+	 * Output the PDF as a string.
 	 *
-	 * @param string  $code
-	 * @return \Cartalyst\Sentry\Users\UserInterface
-	 * @throws \RuntimeException
-	 * @throws \Cartalyst\Sentry\Users\UserNotFoundException
+	 * @return string The rendered PDF as string
 	 * @static 
 	 */
-	 public static function findUserByActivationCode($code){
-		return Cartalyst\Sentry\Sentry::findUserByActivationCode($code);
+	 public static function output(){
+		return Barryvdh\DomPDF\PDF::output();
 	 }
 
 	/**
-	 * Finds a user by the given reset password code.
+	 * Save the PDF to a file
 	 *
-	 * @param string  $code
-	 * @return \Cartalyst\Sentry\Users\UserInterface
-	 * @throws \RuntimeException
-	 * @throws \Cartalyst\Sentry\Users\UserNotFoundException
+	 * @param $filename
+	 * @return static
 	 * @static 
 	 */
-	 public static function findUserByResetPasswordCode($code){
-		return Cartalyst\Sentry\Sentry::findUserByResetPasswordCode($code);
+	 public static function save($filename){
+		return Barryvdh\DomPDF\PDF::save($filename);
 	 }
 
 	/**
-	 * Returns an all users.
+	 * Make the PDF downloadable by the user
 	 *
-	 * @return array
+	 * @param string $filename
+	 * @return \Symfony\Component\HttpFoundation\Response
 	 * @static 
 	 */
-	 public static function findAllUsers(){
-		return Cartalyst\Sentry\Sentry::findAllUsers();
+	 public static function download($filename = 'document.pdf'){
+		return Barryvdh\DomPDF\PDF::download($filename);
 	 }
 
 	/**
-	 * Returns all users who belong to
-	 * a group.
+	 * Return a response with the PDF to show in the browser
 	 *
-	 * @param \Cartalyst\Sentry\Groups\GroupInterface  $group
-	 * @return array
+	 * @param string $filename
+	 * @return \Symfony\Component\HttpFoundation\Response
 	 * @static 
 	 */
-	 public static function findAllUsersInGroup($group){
-		return Cartalyst\Sentry\Sentry::findAllUsersInGroup($group);
-	 }
-
-	/**
-	 * Returns all users with access to
-	 * a permission(s).
-	 *
-	 * @param string|array  $permissions
-	 * @return array
-	 * @static 
-	 */
-	 public static function findAllUsersWithAccess($permissions){
-		return Cartalyst\Sentry\Sentry::findAllUsersWithAccess($permissions);
-	 }
-
-	/**
-	 * Returns all users with access to
-	 * any given permission(s).
-	 *
-	 * @param array  $permissions
-	 * @return array
-	 * @static 
-	 */
-	 public static function findAllUsersWithAnyAccess($permissions){
-		return Cartalyst\Sentry\Sentry::findAllUsersWithAnyAccess($permissions);
-	 }
-
-	/**
-	 * Creates a user.
-	 *
-	 * @param array  $credentials
-	 * @return \Cartalyst\Sentry\Users\UserInterface
-	 * @static 
-	 */
-	 public static function createUser($credentials){
-		return Cartalyst\Sentry\Sentry::createUser($credentials);
-	 }
-
-	/**
-	 * Returns an empty user object.
-	 *
-	 * @return \Cartalyst\Sentry\Users\UserInterface
-	 * @static 
-	 */
-	 public static function getEmptyUser(){
-		return Cartalyst\Sentry\Sentry::getEmptyUser();
-	 }
-
-	/**
-	 * Finds a throttler by the given user ID.
-	 *
-	 * @param mixed   $id
-	 * @param string  $ipAddress
-	 * @return \Cartalyst\Sentry\Throttling\ThrottleInterface
-	 * @static 
-	 */
-	 public static function findThrottlerByUserId($id, $ipAddress = null){
-		return Cartalyst\Sentry\Sentry::findThrottlerByUserId($id, $ipAddress);
-	 }
-
-	/**
-	 * Finds a throttling interface by the given user login.
-	 *
-	 * @param string  $login
-	 * @param string  $ipAddress
-	 * @return \Cartalyst\Sentry\Throttling\ThrottleInterface
-	 * @static 
-	 */
-	 public static function findThrottlerByUserLogin($login, $ipAddress = null){
-		return Cartalyst\Sentry\Sentry::findThrottlerByUserLogin($login, $ipAddress);
-	 }
-
-	/**
-	 * Handle dynamic method calls into the method.
-	 *
-	 * @param string  $method
-	 * @param array   $parameters
-	 * @return mixed
-	 * @throws \BadMethodCallException
-	 * @static 
-	 */
-	 public static function __call($method, $parameters){
-		return Cartalyst\Sentry\Sentry::__call($method, $parameters);
+	 public static function stream($filename = 'document.pdf'){
+		return Barryvdh\DomPDF\PDF::stream($filename);
 	 }
 
 }
