@@ -14,5 +14,9 @@
 Route::get('/', function()
 {
 
-	return View::make('hello');
+    var_dump( Sentry::getUserProvider() );
+
+    //print_r(Sentry::getUserProvider());
+    //print_r(SentryAdmin::getUserProvider());
+	//return View::make('hello');
 });

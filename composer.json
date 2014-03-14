@@ -7,11 +7,16 @@
 		"laravel/framework": "4.1.*",
         "maatwebsite/excel": "0.3.*",
         "barryvdh/laravel-dompdf": "0.3.*",
-        "twbs/bootstrap": "3.1.*"
+        "twbs/bootstrap": "3.1.*",
+        "cartalyst/sentry": "2.1.*",
+        "laravelbook/ardent": "2.4.*",
+        "barryvdh/laravel-httpcache": "*",
+		"ryannielson/meta": "1.0.*"
 	},
     "require-dev": {
         "way/generators": "2.*",
-        "barryvdh/laravel-ide-helper": "1.*"
+        "barryvdh/laravel-ide-helper": "1.*",
+        "mockery/mockery": "0.9.*"
     },
 	"autoload": {
 		"classmap": [
@@ -20,7 +25,8 @@
 			"app/models",
 			"app/database/migrations",
 			"app/database/seeds",
-			"app/tests/TestCase.php"
+			"app/tests/TestCase.php",
+            "app/lib"
 		]
 	},
 	"scripts": {
