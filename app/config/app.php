@@ -44,6 +44,7 @@ return array(
         'Barryvdh\DomPDF\ServiceProvider',
         'Cartalyst\Sentry\SentryServiceProvider',
         'Barryvdh\HttpCache\ServiceProvider',
+        'Menu\MenuServiceProvider',
         //'Lib\SentryMods\SentryAdminServiceProvider',
 	),
 
@@ -99,11 +100,10 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
-
         'Excel'           => 'Maatwebsite\Excel\Facades\Excel',
         'PDF'             => 'Barryvdh\DomPDF\Facade',
-
         'Sentry'          => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
+        'Menu'            => 'Menu\Menu'
         //'SentryAdmin'     => 'Lib\SentryMods\SentryAdmin',
 	),
 
